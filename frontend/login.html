@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+</head>
+<body>
+    <h1><a href="index.html">Home page</a></h1>;
+    <br>
+    <h1><a href="login.html">login page</a></h1>;
+    <br>
+    <h1><a href="signup.html">signup page</a></h1>
+    <br>
+    <h1><a href="posts.html">posts page</a></h1>
+
+    <input id="mail" type="text" placeholder="mail">
+    <input type="text" id="pass" placeholder="password">
+    <button onclick="login()">login</button>
+</body>
+</html>
+<script>
+async function login(){
+    let email = document.getElementById("mail");
+    let password = document.getElementById("pass");
+    try {
+        let obj = {
+                email : email.value,
+                password : password.value
+            }
+          
+          let change_pass = await fetch(`https://panicky-cyan-boa.cyclic.app/users/login/`,{
+              method:"POST",
+              headers : {
+                  "Content-Type" : "application/json"
+              },
+              body:JSON.stringify(obj)
+          })
+          let out = await change_pass.json();
+          localStorage.setItem("accesstocken",out.Access_Token)
+          console.log(out)
+    } catch (error) {
+        console.log("something went wrong")
+    }
+}
+</script>
