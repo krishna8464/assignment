@@ -8,12 +8,14 @@ require('dotenv').config()
 const cors = require("cors")
 
 
-app.use(cors({
-    origin:"*"
-}))
+
 
 app = express();
 app.use(express.json())
+
+app.use(cors({
+    origin:"*"
+}))
 
 app.get("/",async(req,res)=>{
     try {
